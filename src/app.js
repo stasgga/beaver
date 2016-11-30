@@ -1,16 +1,18 @@
-var express = require('express')
-var app = express()
-var fs = require('fs')
+import express from 'express'
+import fs from 'fs'
 
-var frame = require('./src/framebuilder')
-var svg = require('./src/svg')
+import build from './framebuilder'
+import svg from './svg'
+import { frameBox } from './blueprint/index'
+
+var app = express()
 
 app.get('/', function(req, res){
   res.send('hello world')
 })
 
 app.get('/save/:width/:height', function(req, res) {
-  fs.writeFile("test", svg.wrapper(frame.build(req.params.width, req.params.height)), function(err) {
+  fs.writeFile("test", svg(frameBox(req.params.width, req.params.height)), function(err) {
     if(err) {
       return console.log(err)
     }
