@@ -5,7 +5,11 @@ import build from './framebuilder'
 import svg from './svg'
 import { frameBox, basicFrame } from './blueprint/index'
 
+import cors from 'cors'
+
 var app = express()
+
+app.use(cors())
 
 var path = process.env.PWD
 
